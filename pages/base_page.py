@@ -1,5 +1,8 @@
 from selenium.common.exceptions import NoSuchElementException
 
+from pages.locators import MainPageLocators
+
+
 class BasePage(object):
     def __init__(self, browser, url, timeout=10):
         self.browser = browser
@@ -10,6 +13,13 @@ class BasePage(object):
         self.browser.get(self.url)
 
     def is_element_present(self, how, what):
+        try:
+            self.browser.find_element(how, what)
+        except (NoSuchElementException):
+            return False
+        return True
+
+    def is_url_present(self, how, what):
         try:
             self.browser.find_element(how, what)
         except (NoSuchElementException):

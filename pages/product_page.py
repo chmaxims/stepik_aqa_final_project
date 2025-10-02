@@ -23,5 +23,13 @@ class ProductPage(BasePage):
         book_name = self.browser.find_element(*MainPageLocators.BOOK_NAME)
         assert message_alert_book_name.text == book_name.text, f'expected: name "{book_name.text}", actual: "{message_alert_book_name.text}"'
 
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*MainPageLocators.SUCCESS_MESSAGE), \
+            "Success message is presented, but should not be"
+
+    def should_success_message_disappear(self):
+        assert self.is_disappeared(*MainPageLocators.SUCCESS_MESSAGE), \
+            "Success message is still present, but it was expected to disappear"
+
     # def link(self):
     #     link = self.browser.find_element(*MainPageLocators.LINK)

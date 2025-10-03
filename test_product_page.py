@@ -1,6 +1,8 @@
 from os import link
-
+from pages .base_page import BasePage
 from pages.basket_page import BasketPage
+from pages.locators import LoginPageLocators
+from pages.login_page import LoginPage
 from pages.product_page import ProductPage
 import pytest
 import time
@@ -67,3 +69,26 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     basket_page.view_basket_header()
     basket_page.should_be_empty_basket()
     basket_page.should_be_text_about_empty_basket()
+
+
+class TestUserAddToBasketFromProductPage():
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        self.link = 'https://selenium1py.pythonanywhere.com/ru/accounts/login/'
+        page = LoginPage(browser, self.link)
+        page.open()
+        page.register_new_user()
+        page.should_be_authorized_user()
+
+    def test_user_can_add_product_to_basket(self,browser,setup):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1'
+        page = ProductPage(browser, link)  # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
+        page.open()  # открываем страницу
+        page.should_be_add_to_basket()
+
+    def test_user_cant_see_success_message(self, browser):
+        link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1'
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
+

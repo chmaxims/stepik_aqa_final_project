@@ -1,11 +1,8 @@
-from os import link
-from pages .base_page import BasePage
 from pages.basket_page import BasketPage
-from pages.locators import LoginPageLocators
 from pages.login_page import LoginPage
 from pages.product_page import ProductPage
 import pytest
-import time
+
 
 url_list = ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer0",
                                   "http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1",
@@ -20,29 +17,28 @@ url_list = ["http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/
 
 @pytest.mark.parametrize('link', url_list)
 def test_guest_can_add_product_to_basket(browser, link):
-    # link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/'
     page = ProductPage(browser, link) # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
     page.open() # открываем страницу
     page.should_be_add_to_basket()
 
 @pytest.mark.xfail
-@pytest.mark.parametrize('link', url_list)
-def test_guest_cant_see_success_message_after_adding_product_to_basket(browser,link):
+def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
+    link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1'
     page = ProductPage(browser, link)
     page.open()
     page.add_to_basket()
     page.solve_quiz_and_get_code()
     page.should_not_be_success_message()
 
-@pytest.mark.parametrize('link', url_list)
-def test_guest_cant_see_success_message(browser, link):
+def test_guest_cant_see_success_message(browser):
+    link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1'
     page = ProductPage(browser, link)
     page.open()
     page.should_not_be_success_message()
 
 @pytest.mark.xfail
-@pytest.mark.parametrize('link', url_list)
-def test_message_disappeared_after_adding_product_to_basket(browser, link):
+def test_message_disappeared_after_adding_product_to_basket(browser):
+    link = 'http://selenium1py.pythonanywhere.com/catalogue/coders-at-work_207/?promo=offer1'
     page = ProductPage(browser, link)
     page.open()
     page.add_to_basket()

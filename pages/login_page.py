@@ -1,5 +1,5 @@
 from .base_page import BasePage
-from pages.locators import LoginPageLocators, MainPageLocators, BasePageLocators
+from pages.locators import LoginPageLocators, BasePageLocators
 import time
 
 

@@ -1,9 +1,8 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, NoAlertPresentException, TimeoutException
 import math
-import time
 from selenium.webdriver.support.wait import WebDriverWait
-from pages.locators import MainPageLocators, BasePageLocators
+from pages.locators import BasePageLocators
 
 
 class BasePage(object):
@@ -27,7 +26,6 @@ class BasePage(object):
             WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return True
-
         return False
 
     def is_disappeared(self, how, what, timeout=4):
@@ -36,7 +34,6 @@ class BasePage(object):
                 until_not(EC.presence_of_element_located((how, what)))
         except TimeoutException:
             return False
-
         return True
 
     def solve_quiz_and_get_code(self):

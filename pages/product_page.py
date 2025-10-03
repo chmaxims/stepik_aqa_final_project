@@ -30,6 +30,3 @@ class ProductPage(BasePage):
     def should_success_message_disappear(self):
         assert self.is_disappeared(*MainPageLocators.SUCCESS_MESSAGE), \
             "Success message is still present, but it was expected to disappear"
-
-    # def link(self):
-    #     link = self.browser.find_element(*MainPageLocators.LINK)

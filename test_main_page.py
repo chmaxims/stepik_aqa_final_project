@@ -1,12 +1,8 @@
 import pytest
-
 from pages.basket_page import BasketPage
 from pages.main_page import MainPage
 from pages.login_page import LoginPage
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.common.by import By
-import time
+
 
 @pytest.mark.login_guest
 class TestLoginFromMainPage():

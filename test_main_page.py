@@ -5,7 +5,7 @@ from pages.login_page import LoginPage
 
 
 @pytest.mark.login_guest
-class TestLoginFromMainPage():
+class TestLoginFromMainPage:
     def test_guest_can_go_to_login_page(self, browser):
         link = 'http://selenium1py.pythonanywhere.com/'
         page = MainPage(browser, link) # инициализируем Page Object, передаем в конструктор экземпляр драйвера и url адрес
